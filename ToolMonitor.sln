@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolMonitor", "ToolMonitor\ToolMonitor.csproj", "{B70A05EF-7FF2-4555-82B3-050FD0E8C3D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolMonitor.DataAccess", "ToolMonitor.DataAccess\ToolMonitor.DataAccess.csproj", "{77D25C8F-9E10-448F-A73E-4FEB0878B728}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B70A05EF-7FF2-4555-82B3-050FD0E8C3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70A05EF-7FF2-4555-82B3-050FD0E8C3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70A05EF-7FF2-4555-82B3-050FD0E8C3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70A05EF-7FF2-4555-82B3-050FD0E8C3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77D25C8F-9E10-448F-A73E-4FEB0878B728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D25C8F-9E10-448F-A73E-4FEB0878B728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D25C8F-9E10-448F-A73E-4FEB0878B728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D25C8F-9E10-448F-A73E-4FEB0878B728}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {539C34F1-EA53-4B41-8353-D29226DFDE42}
+	EndGlobalSection
+EndGlobal
