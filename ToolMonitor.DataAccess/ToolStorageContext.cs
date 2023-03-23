@@ -9,7 +9,12 @@ namespace ToolMonitor.DataAccess
         {
         }
 
-        public DbSet<Tool> Tools { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Dealer> Dealers { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Tool> Tools { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
