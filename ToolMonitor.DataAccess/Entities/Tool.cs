@@ -14,7 +14,7 @@ namespace ToolMonitor.DataAccess.Entities
         public string ToolName { get; set; }
         [MaxLength(500)]
         public string ToolDescription { get; set; }
-        public int ManufactureeId { get; set; }
+        public int ManufacturerId { get; set; }
         public int DealerId { get; set; }
         public int InvoiceId { get; set; }
         public int CategoryId { get; set; }

@@ -10,5 +10,6 @@ namespace ToolMonitor.DataAccess
         }
 
         public DbSet<Tool> Tools { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

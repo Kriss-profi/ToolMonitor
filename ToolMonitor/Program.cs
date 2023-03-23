@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ToolStorageContext>(opt => opt.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorCStorage;Integrated Security=True"));
+builder.Services.AddDbContext<ToolStorageContext>(opt => opt.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorCStorage;Integrated Security=True;TrustServerCertificate=True"));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
