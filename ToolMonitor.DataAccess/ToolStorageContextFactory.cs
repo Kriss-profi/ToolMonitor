@@ -8,7 +8,7 @@ namespace ToolMonitor.DataAccess
         {
             
             var optionsBuilder = new DbContextOptionsBuilder<ToolStorageContext>();
-            optionsBuilder.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorStorage;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorCStorage;Integrated Security=True");
             return new ToolStorageContext(optionsBuilder.Options);
         }
     }
