@@ -19,5 +19,9 @@ namespace ToolMonitor.Controllers
         [HttpGet]
         [Route("")]
         public IEnumerable<Category> GetAllTools() => categoryRepository.GetAll();
+
+        [HttpGet]
+        [Route("{categoryId}")]
+        public Category GetCategoryById(int categoryId) => categoryRepository.GetById(categoryId);
     }
 }
