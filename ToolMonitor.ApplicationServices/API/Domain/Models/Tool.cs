@@ -9,7 +9,7 @@ namespace ToolMonitor.ApplicationServices.API.Domain.Models
     public class Tool
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string ToolName { get; set; }
         public string Description { get; set; }
     }
 }
