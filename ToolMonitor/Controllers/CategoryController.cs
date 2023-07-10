@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.Entities;
 
@@ -8,12 +9,13 @@ namespace ToolMonitor.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-
+        private readonly IMediator mediator;
         private readonly IRepository<Category> categoryRepository;
 
-        public CategoryController(IRepository<Category> categoryRepository)
+        public CategoryController(IRepository<Category> categoryRepository, IMediator mediator)
         {
             this.categoryRepository = categoryRepository;
+            this.mediator = mediator;
         }
 
         [HttpGet]
