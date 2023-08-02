@@ -13,7 +13,9 @@ builder.Services.AddAutoMapper(typeof(ToolsProfile).Assembly);
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ToolStorageContext>(opt => opt.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorCStorage;Integrated Security=True;TrustServerCertificate=True"));
+builder.Configuration.AddJsonFile("appsettings.json");
+builder.Services.AddDbContext<ToolStorageContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ToolStorageDatabaseConection")));
+//builder.Services.AddDbContext<ToolStorageContext>(opt => opt.UseSqlServer("Data Source=kriss\\sqlexpress;Initial Catalog=ToolMonitorStorage;Integrated Security=True;TrustServerCertificate=True"));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 
