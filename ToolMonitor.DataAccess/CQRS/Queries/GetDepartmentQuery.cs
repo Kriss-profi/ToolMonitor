@@ -8,12 +8,12 @@ using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.DataAccess.CQRS.Queries
 {
-    public class GetToolsQuery : QueryBase<List<Tool>>
+    public class GetDepartmentQuery : QueryBase<Department>
     {
-        public int CompanyId { get; set; }
-        public override async Task<List<Tool>> Execute(ToolStorageContext context)
+        public int Id { get; set; }
+        public override async Task<Department> Execute(ToolStorageContext context)
         {
-            return await context.Tools.Where(x => x.CompanyId == CompanyId).ToListAsync();
+            return await context.Departments.FirstOrDefaultAsync(x => x.Id == this.Id);
         }
     }
 }
