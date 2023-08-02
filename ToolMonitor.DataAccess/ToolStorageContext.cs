@@ -10,6 +10,7 @@ namespace ToolMonitor.DataAccess
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
