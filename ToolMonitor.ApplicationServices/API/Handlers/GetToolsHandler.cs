@@ -16,6 +16,7 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
             this.toolRepository = toolRepository;
             this.mapper = mapper;
         }
+
         public Task<GetToolsResponse> Handle(GetToolsRequest request, CancellationToken cancellationToken)
         {
             var tools = this.toolRepository.GetAll();
