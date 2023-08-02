@@ -1,0 +1,7 @@
+﻿Aby dodać Migrację do bazy danych w konsoli podajemy komendę z nazwą migracji:
+	1. Add-Migration InitialMigration
+		- jako projekt startowy ustawić ...DataAccess
+		- ustawić referencje do projektu.
+
+
+	X. Update-Database Zapisywanie migracji do bazy danych
