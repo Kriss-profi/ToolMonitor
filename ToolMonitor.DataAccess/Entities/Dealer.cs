@@ -10,5 +10,6 @@ namespace ToolMonitor.DataAccess.Entities
     {
         public string Name { get; set; }
         public string Web { get; set; }
+        public string DealerEmail { get; set; }
     }
 }

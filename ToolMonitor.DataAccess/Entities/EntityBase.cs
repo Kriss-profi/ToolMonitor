@@ -6,5 +6,8 @@ namespace ToolMonitor.DataAccess.Entities
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public int CompanyId { get; set; }
     }
 }
