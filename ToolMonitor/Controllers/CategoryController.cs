@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ToolMonitor.ApplicationServices.API.Domain.Categories;
 using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.Entities;
 
@@ -10,20 +11,29 @@ namespace ToolMonitor.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly IMediator mediator;
-        private readonly IRepository<Category> categoryRepository;
-
-        public CategoryController(IRepository<Category> categoryRepository, IMediator mediator)
+        public CategoryController(IMediator mediator)
         {
-            this.categoryRepository = categoryRepository;
             this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Category> GetAllTools() => categoryRepository.GetAll();
+        public async Task<IActionResult> GetAllCategories([FromQuery] GetCategoryRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
 
         [HttpGet]
         [Route("{categoryId}")]
-        public Category GetCategoryById(int categoryId) => categoryRepository.GetById(categoryId);
+        public async Task<IActionResult> GetCategoryById([FromRoute] int categoryId)
+        {
+            var request = new GetCategoryByIdRequest()
+            {
+                Id = categoryId,
+            };
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
     }
 }

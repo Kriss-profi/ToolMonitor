@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToolMonitor.ApplicationServices.API.Domain.Models;
 using ToolMonitor.DataAccess;
-using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.Controllers
 {
@@ -9,15 +9,15 @@ namespace ToolMonitor.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IRepository<User> userRepository;
+        //private readonly IRepository<User> userRepository;
 
-        public UserController(IRepository<User> userRepository)
-        {
-            this.userRepository = userRepository;
-        }
+        //public UserController(IRepository<User> userRepository)
+        //{
+        //    this.userRepository = userRepository;
+        //}
 
-        [HttpGet]
-        [Route("")]
-        public IEnumerable<User> GetAllUsers() => userRepository.GetAll();
+        //[HttpGet]
+        //[Route("")]
+        //public IEnumerable<User> GetAllUsers() => userRepository.GetAll();
     }
 }
