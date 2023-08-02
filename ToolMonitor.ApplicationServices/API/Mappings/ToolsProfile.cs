@@ -14,8 +14,8 @@ namespace ToolMonitor.ApplicationServices.API.Mappings
         {
             this.CreateMap<DataAccess.Entities.Tool, Tool>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.ToolName, y => y.MapFrom(z => z.ToolName));
-                //.ForMember(x => x.Description, y => y.MapFrom(z => z.ToolDescription));
+                .ForMember(x => x.ToolName, y => y.MapFrom(z => z.ToolName))
+                .ForMember(x => x.Description, y => y.MapFrom(z => z.ToolDescription));
         }
     }
 }
