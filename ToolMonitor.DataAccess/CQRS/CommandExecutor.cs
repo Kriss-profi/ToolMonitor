@@ -10,6 +10,7 @@ namespace ToolMonitor.DataAccess.CQRS
     public class CommandExecutor : ICommandExecutor
     {
         private readonly ToolStorageContext context; 
+
         public CommandExecutor(ToolStorageContext context)
         {
             this.context = context;
