@@ -8,7 +8,8 @@ namespace ToolMonitor.ApplicationServices.API.Domain.Models
 {
     public class Category
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
+        //public int CompanyId { get; set; }
         public string CategoryName { get; set; }
 
     }

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolMonitor.ApplicationServices.API.Domain.Categorys
+namespace ToolMonitor.ApplicationServices.API.Domain.Categories
 {
     public class GetCategoryRequest : IRequest<GetCategoryResponse>
     {
+        //public int CompanyId { get; set; }
     }
 }
