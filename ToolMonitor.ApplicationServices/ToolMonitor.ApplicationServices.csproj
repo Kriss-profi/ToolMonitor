@@ -17,4 +17,12 @@
     <ProjectReference Include="..\ToolMonitor.DataAccess\ToolMonitor.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="API\Domain\Companies\" />
+    <Folder Include="API\Domain\Departments\" />
+    <Folder Include="API\Domain\Employees\" />
+    <Folder Include="API\Domain\Manufacturers\" />
+    <Folder Include="API\Domain\Tools\" />
+  </ItemGroup>
+
 </Project>
