@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.DataAccess.Entities
 {
-    public class Dealer : EntityBase
+    public enum UserStatus
     {
-        public string DealerName { get; set; }
-        public string DealerWeb { get; set; }
-        public string DealerEmail { get; set; }
+        Destreued,
+        NewAdmin,
+        Admin,
+        SuperAdmin
+
     }
 }
