@@ -1,15 +1,20 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ToolMonitor.ApplicationServices.API.Domain;
 using ToolMonitor.ApplicationServices.API.Mappings;
+using ToolMonitor.ApplicationServices.API.Validators;
 using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddFluentValidation(typeof(AddCompanyRequestValidator).Assembly);
+builder.Services.AddMvcCore().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddCompanyRequestValidator>());
 builder.Services.AddAutoMapper(typeof(ToolsProfile).Assembly);
+builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 builder.Services.AddControllers();
@@ -19,7 +24,7 @@ builder.Services.AddDbContext<ToolStorageContext>(options => options.UseSqlServe
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 
-builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(ResponseBase<>).Assembly); });
+//builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(ResponseBase<>).Assembly); });
 
 
 
