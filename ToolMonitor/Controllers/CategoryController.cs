@@ -35,5 +35,15 @@ namespace ToolMonitor.Controllers
             var response = await this.mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
+
+
     }
 }

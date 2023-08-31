@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToolMonitor.ApplicationServices.API.Domain.Manufacturers;
 using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.Entities;
 
@@ -9,15 +11,31 @@ namespace ToolMonitor.Controllers
     [ApiController]
     public class ManufacturerController : ControllerBase
     {
-        private readonly IRepository<Manufacturer> manufacturerRepository;
+        private readonly IMediator mediator;
 
-        public ManufacturerController(IRepository<Manufacturer> manufacturerRepository)
+        public ManufacturerController(IMediator mediator)
         {
-            this.manufacturerRepository = manufacturerRepository;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Manufacturer> GetAllManufacturers() => manufacturerRepository.GetAll();
+        public async Task<IActionResult> GetAllManufacturers([FromQuery] GetManufacturersRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{manufacturerId}")]
+        public async Task<IActionResult> GetManufacturerById([FromRoute] int manufacturerId)
+        {
+            var request = new GetManufacturerByIdRequest()
+            {
+                ManufacturerId = manufacturerId,
+            };
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
     }
 }

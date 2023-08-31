@@ -1,24 +1,23 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ToolMonitor.ApplicationServices.API.Domain;
+using ToolMonitor.ApplicationServices.API.Domain.Users;
 
 namespace ToolMonitor.Controllers
 {
-    [Route("apimaped/[controller]")]
     [ApiController]
-    public class ToolsController : ControllerBase
+    [Route("admin/[controller]")]
+    public class AdminController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public ToolsController(IMediator mediator)
+        public AdminController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllTools([FromQuery] GetToolsRequest request)
+        public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);

@@ -1,23 +1,41 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToolMonitor.ApplicationServices.API.Domain.Employees;
 using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IRepository<Employee> employeeRepository;
+        private readonly IMediator mediator;
 
-        public EmployeeController(IRepository<Employee> employeeRepository)
+        public EmployeeController(IMediator mediator)
         {
-            this.employeeRepository = employeeRepository;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Employee> GetAllEmployees() => employeeRepository.GetAll();
+        public async Task<IActionResult> GetAllEmployees([FromQuery] GetEmployeesRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
+    
+        [HttpGet]
+        [Route("{employeeId}")]
+        public async Task<IActionResult> GetEmployeeById([FromRoute] int employeeId)
+        {
+            var request = new GetEmployeeByIdRequest()
+            {
+                Id = employeeId,
+            };
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
     }
 }

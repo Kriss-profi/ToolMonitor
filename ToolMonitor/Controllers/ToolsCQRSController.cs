@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using ToolMonitor.ApplicationServices.API.Domain;
+using ToolMonitor.ApplicationServices.API.Domain.Tools;
 
 namespace ToolMonitor.Controllers
 {
@@ -19,7 +19,7 @@ namespace ToolMonitor.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllTools([FromQuery] GetToolsCQRSRequest request)
+        public async Task<IActionResult> GetAllTools([FromQuery] GetToolsRequest request)
         {
             var response = await mediator.Send(request);
             return Ok(response);
