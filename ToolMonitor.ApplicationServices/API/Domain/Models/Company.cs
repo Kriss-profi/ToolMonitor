@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Models
 {
-    public class Dealer
+    public class Company
     {
         public int Id { get; set; }
-        public string DealerName { get; set; }
-        public string DealerWeb { get; set; }
-        public string DealerEmail { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyCity { get; set; }
     }
 }

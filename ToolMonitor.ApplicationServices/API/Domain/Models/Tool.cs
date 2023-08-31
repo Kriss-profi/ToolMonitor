@@ -10,6 +10,13 @@ namespace ToolMonitor.ApplicationServices.API.Domain.Models
     {
         public int Id { get; set; }
         public string ToolName { get; set; }
-        public string Description { get; set; }
+        public string ToolDescription { get; set; }
+        public int? ManufacturerId { get; set; }
+        public int? DealerId { get; set; }
+        public int? InvoiceId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? EmployeeId { get; set; }
+        public DateTime BayData { get; set; }
+        public int Varanty { get; set; }
     }
 }
