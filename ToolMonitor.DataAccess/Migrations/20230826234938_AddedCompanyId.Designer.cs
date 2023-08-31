@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToolMonitor.DataAccess;
 
@@ -11,9 +12,11 @@ using ToolMonitor.DataAccess;
 namespace ToolMonitor.DataAccess.Migrations
 {
     [DbContext(typeof(ToolStorageContext))]
-    partial class ToolStorageContextModelSnapshot : ModelSnapshot
+    [Migration("20230826234938_AddedCompanyId")]
+    partial class AddedCompanyId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
