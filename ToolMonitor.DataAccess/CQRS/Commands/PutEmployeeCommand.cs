@@ -7,11 +7,11 @@ using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.DataAccess.CQRS.Commands
 {
-    public class AddCompanyCommand : CommandBase<Company, Company>
+    public class PutEmployeeCommand : CommandBase<Employee, Employee>
     {
-        public override async Task<Company> Execute(ToolStorageContext context)
+        public override async Task<Employee> Execute(ToolStorageContext context)
         {
-            await context.Companies.AddAsync(this.Parameter);
+            context.Employees.Update(this.Parameter);
             await context.SaveChangesAsync();
             return this.Parameter;
         }

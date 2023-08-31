@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,16 @@ using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.DataAccess.CQRS.Commands
 {
-    public class AddCategoryCommand : CommandBase<Category, Category>
+    public class DeleteCategoryCommand : CommandBase<Category, Category>
     {
+        public int Id  { get; set; }
         public override async Task<Category> Execute(ToolStorageContext context)
         {
-            context.Categories.AddAsync(this.Parameter);
+            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == this.Id);
+            if(category != null)
+            {
+                context.Categories.Remove(category);
+            }
             await context.SaveChangesAsync();
             return this.Parameter;
         }
