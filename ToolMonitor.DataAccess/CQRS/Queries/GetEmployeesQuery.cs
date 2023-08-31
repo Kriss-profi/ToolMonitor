@@ -10,7 +10,7 @@ namespace ToolMonitor.DataAccess.CQRS.Queries
 {
     public class GetEmployeesQuery : QueryBase<List<Employee>>
     {
-        public int CompanyId { get; set; }
+        public int CompanyId { get; set; } = 1;
         public override async Task<List<Employee>> Execute(ToolStorageContext context)
         {
             return await context.Employees.Where(x => x.CompanyId == CompanyId).ToListAsync();
