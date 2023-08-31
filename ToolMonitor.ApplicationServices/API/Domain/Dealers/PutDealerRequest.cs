@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Dealers
 {
-    public class GetDealerByIdRequest : IRequest<GetDealerByIdResponse>
+    public class PutDealerRequest : IRequest<PutDealerResponse>
     {
         public int Id { get; set; }
+        public string DealerName { get; set; }
+        public string DealerWeb { get; set; }
+        public string DealerEmail { get; set; }
     }
 }

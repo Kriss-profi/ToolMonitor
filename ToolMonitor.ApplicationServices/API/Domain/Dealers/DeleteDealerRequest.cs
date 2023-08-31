@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Dealers
 {
-    public class GetDealerByIdRequest : IRequest<GetDealerByIdResponse>
+    public class DeleteDealerRequest : IRequest<DeleteDealerResponse>
     {
         public int Id { get; set; }
     }
