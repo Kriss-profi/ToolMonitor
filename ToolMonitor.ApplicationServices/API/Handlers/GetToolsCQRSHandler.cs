@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using System.Linq;
-using ToolMonitor.ApplicationServices.API.Domain;
+using ToolMonitor.ApplicationServices.API.Domain.Tools;
 using ToolMonitor.DataAccess.CQRS;
 using ToolMonitor.DataAccess.CQRS.Queries;
 using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.ApplicationServices.API.Handlers
 {
-    public class GetToolsCQRSHandler : IRequestHandler<GetToolsCQRSRequest, GetToolsCQRSResponse>
+    public class GetToolsCQRSHandler : IRequestHandler<GetToolsRequest, GetToolsResponse>
     {
         private readonly IQueryExecutor queryExecutor;
         
@@ -16,7 +16,7 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
             this.queryExecutor  = queryExecutor;
         }
 
-        public  async Task<GetToolsCQRSResponse> Handle(GetToolsCQRSRequest request, CancellationToken cancellation)
+        public  async Task<GetToolsResponse> Handle(GetToolsRequest request, CancellationToken cancellation)
         {
             var query = new GetToolsQuery();
             var tools = await queryExecutor.Execute(query);
@@ -24,11 +24,11 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
             {
                 Id = x.Id,
                 ToolName = x.ToolName,
-                Description = x.ToolDescription,
+                ToolDescription = x.ToolDescription,
             });
             // Czym jest wynik domainTools 
             // Że trzeba go przenosić do listy
-            var response = new GetToolsCQRSResponse()
+            var response = new GetToolsResponse()
             {
                 Data = mapedTools.ToList(),
             };

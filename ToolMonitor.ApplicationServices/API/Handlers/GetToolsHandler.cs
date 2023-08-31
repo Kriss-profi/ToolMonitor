@@ -1,48 +1,42 @@
 ﻿using AutoMapper;
 using MediatR;
-using ToolMonitor.ApplicationServices.API.Domain;
-using ToolMonitor.DataAccess;
-using ToolMonitor.DataAccess.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ToolMonitor.ApplicationServices.API.Domain.Models;
+using ToolMonitor.ApplicationServices.API.Domain.Tools;
+using ToolMonitor.DataAccess.CQRS;
+using ToolMonitor.DataAccess.CQRS.Queries;
 
 namespace ToolMonitor.ApplicationServices.API.Handlers
 {
     public class GetToolsHandler : IRequestHandler<GetToolsRequest, GetToolsResponse>
     {
-        private readonly IRepository<Tool> toolRepository;
         private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetToolsHandler(IRepository<DataAccess.Entities.Tool> toolRepository, IMapper mapper)
+        public GetToolsHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.toolRepository = toolRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
 
-        public Task<GetToolsResponse> Handle(GetToolsRequest request, CancellationToken cancellationToken)
+        public async Task<GetToolsResponse> Handle(GetToolsRequest request, CancellationToken cancellationToken)
         {
-            var tools = this.toolRepository.GetAll();
-            var mappedTools = this.mapper.Map<List<Domain.Models.Tool>>(tools);
-
-            var toolsResponse = new GetToolsResponse()
+            var query = new GetToolsQuery();
+            if(request.ToolName != null)
             {
-                Data = mappedTools
+                query.ToolName = request.ToolName;
+            }
+            var tools = await this.queryExecutor.Execute(query);
+            var mappedTools = this.mapper.Map<List<Tool>>(tools);
+            var response = new GetToolsResponse()
+            {
+                Data = mappedTools,
             };
-
-            return Task.FromResult(toolsResponse);
-
-            //var tools = this.toolRepository.GetAll();
-            //var domainTools = tools.Select(x => new Domain.Models.Tool()
-            //{
-            //    Id = x.Id,
-            //    ToolName = x.ToolName,
-            //    Description = x.ToolDescription,
-            //});
-            //// Czym jest wynik domainTools 
-            //// Że trzeba go przenosić do listy
-            //var response = new GetToolsResponse()
-            //{
-            //    Data = domainTools.ToList(),
-            //};
-            //return Task.FromResult(response);
+            return response;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
 
         public async Task<GetCategoryResponse> Handle(GetCategoryRequest request, CancellationToken cancellationToken)
         {
-            int company = 2;
+            int company = 1;
 
             var query = new GetCategoriesQuery();
 
