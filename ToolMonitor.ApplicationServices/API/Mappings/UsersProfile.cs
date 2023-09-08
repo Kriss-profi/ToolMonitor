@@ -12,7 +12,7 @@ namespace ToolMonitor.ApplicationServices.API.Mappings
     {
         public UsersProfile()
         {
-            this.CreateMap<ToolMonitor.DataAccess.Entities.User, User>()
+            this.CreateMap<DataAccess.Entities.User, User>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.CompanyId, y => y.MapFrom(z => z.CompanyId))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
