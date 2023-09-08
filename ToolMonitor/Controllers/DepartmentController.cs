@@ -9,32 +9,54 @@ namespace ToolMonitor.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DepartmentController : ControllerBase
+    public class DepartmentController : ApiControllerBase
     {
-        private readonly IMediator mediator;
 
-        public DepartmentController(IMediator mediator)
+        public DepartmentController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetDepartments([FromQuery] GetDepartmentRequest request)
+        public Task<IActionResult> GetDepartments([FromQuery] GetDepartmentRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest< GetDepartmentRequest, GetDepartmentResponse>(request);
         }
 
         [HttpGet]
         [Route("{departmentId}")]
-        public async Task<IActionResult> GetDepartmentById([FromRoute] int departmentId)
+        public Task<IActionResult> GetDepartmentById([FromRoute] int departmentId)
         {
-            var query = new GetDepartmentByIdRequest()
+            var request = new GetDepartmentByIdRequest()
             {
                 DepartmentId = departmentId,
             };
-            var response = await this.mediator.Send(query);
+            return this.HandleRequest<GetDepartmentByIdRequest, GetDepartmentByIdResponse>(request);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public Task<IActionResult> AddDepartment([FromBody] AddDepartmentRequest request)
+        {
+            return this.HandleRequest<AddDepartmentRequest, AddDepartmentResponse>(request);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public Task<IActionResult> PutDepartment([FromBody] PutDepartmentRequest request)
+        {
+            return this.HandleRequest<PutDepartmentRequest, PutDepartmentResponse>(request);
+        }
+
+        [HttpDelete]
+        [Route("{departmentId}")]
+        public async Task<IActionResult> DepeteDepartment([FromRoute] int departmentId)
+        {
+            var request = new DeleteDepartmentRequest()
+            {
+                Id = departmentId,
+            };
+            var response = await this.mediator.Send(request);
             return Ok(response);
         }
     }

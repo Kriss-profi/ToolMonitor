@@ -37,5 +37,34 @@ namespace ToolMonitor.Controllers
             var response = await mediator.Send(request);
             return Ok(response);
         }
+
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddManufacturer([FromBody] AddManufacturerRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> PutManufacturer([FromBody] PutManufacturerRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{ManufacturerId}")]
+        public async Task<IActionResult> DepeteManufacturer([FromRoute] int ManufacturerId)
+        {
+            var request = new DeleteManufacturerRequest()
+            {
+                Id = ManufacturerId,
+            };
+            var response = await this.mediator.Send(request);
+            return Ok(response);
+        }
     }
 }
