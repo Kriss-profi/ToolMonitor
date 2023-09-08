@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
-using ToolMonitor.ApplicationServices.API.Domain.Models;
 using ToolMonitor.DataAccess.CQRS;
 using ToolMonitor.DataAccess.CQRS.Queries;
+using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.Authentication
 {
@@ -71,6 +71,7 @@ namespace ToolMonitor.Authentication
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.LastName),
+                new Claim(ClaimTypes.SerialNumber, user.CompanyId.ToString()),
                 //new Claim(ClaimTypes.Role, user.UserStatus.ToString()),
             };
             var identity = new ClaimsIdentity(claims, Scheme.Name);
