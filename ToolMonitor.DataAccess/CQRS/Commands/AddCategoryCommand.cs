@@ -11,9 +11,9 @@ namespace ToolMonitor.DataAccess.CQRS.Commands
     {
         public override async Task<Category> Execute(ToolStorageContext context)
         {
-            context.Categories.AddAsync(this.Parameter);
+            await context.Categories.AddAsync(Parameter);
             await context.SaveChangesAsync();
-            return this.Parameter;
+            return Parameter;
         }
     }
 }
