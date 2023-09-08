@@ -31,7 +31,6 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
             {
                 Data = mapper.Map<Company>(companyFromDb),
             };
-
         }
     }
 }
