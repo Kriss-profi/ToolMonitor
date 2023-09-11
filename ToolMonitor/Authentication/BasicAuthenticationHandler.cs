@@ -1,29 +1,38 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
-using System.Net.Http.Headers;
-using System.Security.Claims;
+﻿using System;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using ToolMonitor.DataAccess;
 using ToolMonitor.DataAccess.CQRS;
 using ToolMonitor.DataAccess.CQRS.Queries;
 using ToolMonitor.DataAccess.Entities;
+using Microsoft.Extensions.Options;
 
 namespace ToolMonitor.Authentication
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private readonly IQueryExecutor queryExecutor;
+        private readonly AccessCompany accessCompany;
 
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            IQueryExecutor queryExecutor)
+            IQueryExecutor queryExecutor,
+            AccessCompany accessCompany)
             : base(options, logger, encoder, clock)
         {
             this.queryExecutor = queryExecutor;
+            this.accessCompany = accessCompany;
         }
 
         public ClaimsIdentity? Status { get; private set; }
@@ -52,7 +61,8 @@ namespace ToolMonitor.Authentication
                 var password = credentials[1];
                 var query = new GetUserQuery()
                 {
-                    Email = email
+                    Email = email,
+                    
                 };
                 user = await this.queryExecutor.Execute(query);
 
@@ -61,12 +71,13 @@ namespace ToolMonitor.Authentication
                 {
                     return AuthenticateResult.Fail("Invalid Authorization Header");
                 }
+
             }
             catch
             {
                 return AuthenticateResult.Fail("Invalid Authorization Header");
             }
-
+            accessCompany.CompanyId = (int)user.CompanyId;
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
