@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Departments
 {
-    public class GetDepartmentByIdRequest : IRequest<GetDepartmentByIdResponse>
+    public class GetDepartmentByIdRequest : RequestBase<GetDepartmentByIdResponse>
     {
         public int DepartmentId { get; set; }
     }

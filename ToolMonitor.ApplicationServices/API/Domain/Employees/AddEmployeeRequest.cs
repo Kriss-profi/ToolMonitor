@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Employees
 {
-    public class AddEmployeeRequest : IRequest<AddEmployeeResponse>
+    public class AddEmployeeRequest : RequestBase<AddEmployeeResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

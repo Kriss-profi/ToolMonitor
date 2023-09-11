@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Departments
 {
-    public class DeleteDepartmentRequest :IRequest<DeleteDepartmentResponse>
+    public class DeleteDepartmentRequest : RequestBase<DeleteDepartmentResponse>
     {
         public int Id { get; set; }
     }

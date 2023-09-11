@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Manufacturers
 {
-    public class DeleteManufacturerRequest : IRequest<DeleteManufacturerResponse>
+    public class DeleteManufacturerRequest : RequestBase<DeleteManufacturerResponse>
     {
         public int Id { get; set; }
     }

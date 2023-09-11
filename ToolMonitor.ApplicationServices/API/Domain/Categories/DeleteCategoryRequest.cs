@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Categories
 {
-    public class DeleteCategoryRequest : IRequest<DeleteCategoryResponse>
+    public class DeleteCategoryRequest : RequestBase<DeleteCategoryResponse>
     {
         public int CategoryId { get; set; }
     }

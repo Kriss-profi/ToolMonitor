@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Categories
 {
-    public class GetCategoryByIdRequest : IRequest<GetCategoryByIdResponse>
+    public class GetCategoryByIdRequest : RequestBase<GetCategoryByIdResponse>
     {
         public int Id { get; set; }
     }

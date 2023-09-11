@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Tools
 {
-    public class PutToolRequest : IRequest<PutToolResponse>
+    public class PutToolRequest : RequestBase<PutToolResponse>
     {
         public int Id { get; set; }
         public string ToolName { get; set; }

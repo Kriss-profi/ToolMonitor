@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Companies
 {
-    public class DeleteCompanyRequest : IRequest<DeleteCompanyResponse>
+    public class DeleteCompanyRequest : RequestBase<DeleteCompanyResponse>
     {
         public int CompanyId { get; set; }
     }

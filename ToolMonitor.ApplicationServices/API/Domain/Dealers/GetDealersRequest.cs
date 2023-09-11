@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Dealers
 {
-    public class GetDealersRequest : IRequest<GetDealersResponse>
+    public class GetDealersRequest : RequestBase<GetDealersResponse>
     {
         //  tutaj dodaj wyszukiwanie po nazwie
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Users
 {
-    public class GetAllUsersRequest : IRequest<GetAllUsersResponse>
+    public class GetAllUsersRequest : RequestBase<GetAllUsersResponse>
     {
     }
 }

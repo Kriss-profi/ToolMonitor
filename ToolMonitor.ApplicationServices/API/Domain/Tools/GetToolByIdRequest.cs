@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Tools
 {
-    public class GetToolByIdRequest : IRequest<GetToolByIdResponse>
+    public class GetToolByIdRequest : RequestBase<GetToolByIdResponse>
     {
         public int ToolId { get; set; }
     }

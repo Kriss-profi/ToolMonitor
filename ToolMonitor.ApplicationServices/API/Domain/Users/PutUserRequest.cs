@@ -8,7 +8,7 @@ using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Users
 {
-    public class PutUserRequest : IRequest<PutUserResponse>
+    public class PutUserRequest : RequestBase<PutUserResponse>
     {
         public int Id { get; set; }
         public int? CompanyId { get; set; }

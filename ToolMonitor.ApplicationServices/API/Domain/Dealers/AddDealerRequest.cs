@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Dealers
 {
-    public class AddDealerRequest : IRequest<AddDealerResponse>
+    public class AddDealerRequest : RequestBase<AddDealerResponse>
     {
         public string DealerName { get; set; }
         public string DealerWeb { get; set; }

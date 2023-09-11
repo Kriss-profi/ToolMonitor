@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Companies
 {
-    public class GetCompanyRequest : IRequest<GetCompanyResponse>
+    public class GetCompanyRequest : RequestBase<GetCompanyResponse>
     {
     }
 }

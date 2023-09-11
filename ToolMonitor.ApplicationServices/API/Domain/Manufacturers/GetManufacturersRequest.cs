@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Manufacturers
 {
-    public class GetManufacturersRequest : IRequest<GetManufacturersResponse>
+    public class GetManufacturersRequest : RequestBase<GetManufacturersResponse>
     {
         public string Manufacturer { get; set; }
         public GetManufacturersRequest()

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Employees
 {
-    public class DeleteEmployeeRequest : IRequest<DeleteEmployeeResponse>
+    public class DeleteEmployeeRequest : RequestBase<DeleteEmployeeResponse>
     {
         public int Id { get; set; }
     }

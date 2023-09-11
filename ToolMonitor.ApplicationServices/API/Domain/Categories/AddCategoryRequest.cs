@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Categories
 {
-    public class AddCategoryRequest : IRequest<AddCategoryResponse>
+    public class AddCategoryRequest : RequestBase<AddCategoryResponse>
     {
         //public int CompanyId { get; set; }
         public string CategoryName { get; set; }

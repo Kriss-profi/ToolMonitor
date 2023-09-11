@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolMonitor.ApplicationServices.API.Domain.Dealers
 {
-    public class PutDealerRequest : IRequest<PutDealerResponse>
+    public class PutDealerRequest : RequestBase<PutDealerResponse>
     {
         public int Id { get; set; }
         public string DealerName { get; set; }
