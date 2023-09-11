@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ToolMonitor.ApplicationServices.API.Domain.Models;
 using ToolMonitor.ApplicationServices.API.Domain.Users;
 using ToolMonitor.DataAccess;
@@ -9,72 +10,56 @@ namespace ToolMonitor.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-        public UserController(IMediator mediator) //: base(mediator)
+        public UserController(IMediator mediator, ILogger<UserController> logger) : base(mediator)
         {
-            this.mediator = mediator;
+            logger.LogInformation("Wy are in Users");
         }
-
-        //private readonly IRepository<User> userRepository;
-
-        //public UserController(IRepository<User> userRepository)
-        //{
-        //    this.userRepository = userRepository;
-        //}
-
-        //[HttpGet]
-        //[Route("")]
-        //public IEnumerable<User> GetAllUsers() => userRepository.GetAll();
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request)
+        public Task<IActionResult> GetAllUsers([FromQuery] GetUsersRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetUsersRequest, GetUsersResponse>(request);
         }
 
         [HttpGet]
         [Route("{userId}")]
-        public async Task<IActionResult> GetUserById([FromRoute] int userId)
+        public Task<IActionResult> GetUserById([FromRoute] int userId)
         {
             var request = new GetUserByIdRequest()
             {
                 UserId = userId,
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetUserByIdRequest, GetUserByIdResponse>(request);
         }
 
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddUser([FromBody] AddUserRequest request)
+        public Task<IActionResult> AddUser([FromBody] AddUserRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<AddUserRequest, AddUserResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> PutUser([FromBody] PutUserRequest request)
+        public Task<IActionResult> PutUser([FromBody] PutUserRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<PutUserRequest, PutUserResponse>(request);
         }
 
         [HttpDelete]
-        [Route("{UserId}")]
-        public async Task<IActionResult> DepeteUser([FromRoute] int UserId)
+        [Route("{userId}")]
+        public Task<IActionResult> DepeteUser([FromRoute] int userId)
         {
             var request = new DeleteUserRequest()
             {
-                Id = UserId,
+                Id = userId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteUserRequest, DeleteUserResponse>(request);
         }
     }
 }
+

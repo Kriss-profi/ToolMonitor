@@ -6,21 +6,17 @@ namespace ToolMonitor.Controllers
 {
     [ApiController]
     [Route("admin/[controller]")]
-    public class AdminController : ControllerBase
+    public class AdminController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public AdminController(IMediator mediator)
+        public AdminController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request)
+        public Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersRequest request)
         {
-            var response = await mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetAllUsersRequest, GetAllUsersResponse>(request);
         }
     }
 }

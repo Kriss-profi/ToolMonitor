@@ -9,62 +9,54 @@ namespace ToolMonitor.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ManufacturerController : ControllerBase
+    public class ManufacturerController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ManufacturerController(IMediator mediator)
+        public ManufacturerController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllManufacturers([FromQuery] GetManufacturersRequest request)
+        public Task<IActionResult> GetAllManufacturers([FromQuery] GetManufacturersRequest request)
         {
-            var response = await mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetManufacturersRequest, GetManufacturersResponse>(request);
         }
 
         [HttpGet]
         [Route("{manufacturerId}")]
-        public async Task<IActionResult> GetManufacturerById([FromRoute] int manufacturerId)
+        public Task<IActionResult> GetManufacturerById([FromRoute] int manufacturerId)
         {
             var request = new GetManufacturerByIdRequest()
             {
                 ManufacturerId = manufacturerId,
             };
-            var response = await mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetManufacturerByIdRequest, GetManufacturerByIdResponse>(request);
         }
 
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddManufacturer([FromBody] AddManufacturerRequest request)
+        public Task<IActionResult> AddManufacturer([FromBody] AddManufacturerRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<AddManufacturerRequest, AddManufacturerResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> PutManufacturer([FromBody] PutManufacturerRequest request)
+        public Task<IActionResult> PutManufacturer([FromBody] PutManufacturerRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<PutManufacturerRequest, PutManufacturerResponse>(request);
         }
 
         [HttpDelete]
         [Route("{ManufacturerId}")]
-        public async Task<IActionResult> DepeteManufacturer([FromRoute] int ManufacturerId)
+        public  Task<IActionResult> DepeteManufacturer([FromRoute] int ManufacturerId)
         {
             var request = new DeleteManufacturerRequest()
             {
                 Id = ManufacturerId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteManufacturerRequest, DeleteManufacturerResponse>(request);
         }
     }
 }

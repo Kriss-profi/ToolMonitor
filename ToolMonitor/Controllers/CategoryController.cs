@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToolMonitor.ApplicationServices.API.Domain.Categories;
 using ToolMonitor.DataAccess;
@@ -6,14 +7,17 @@ using ToolMonitor.DataAccess.Entities;
 
 namespace ToolMonitor.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CategoryController : ApiControllerBase
     {
-        public CategoryController(IMediator mediator) : base(mediator)
+        //public CategoryController(IMediator mediator, ILogger<CategoryController> logger, AccessCompany accessCompany) : base(mediator, accessCompany)
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger) : base(mediator)
         {
+            logger.LogInformation("Jesteś w kontrolerze kategorji");
         }
-
+        
         [HttpGet]
         [Route("")]
         public Task<IActionResult> GetAllCategories([FromQuery] GetCategoryRequest request)

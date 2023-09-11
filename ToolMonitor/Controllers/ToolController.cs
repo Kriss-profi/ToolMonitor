@@ -6,63 +6,56 @@ using ToolMonitor.ApplicationServices.API.Domain.Tools;
 namespace ToolMonitor.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class ToolController : ControllerBase
+    [Route("[controller]")]
+    public class ToolController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ToolController(IMediator mediator)
+        public ToolController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllTools([FromQuery] GetToolsRequest request)
+        public Task<IActionResult> GetAllTools([FromQuery] GetToolsRequest request)
         {
-            var response = await mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetToolsRequest, GetToolsResponse>(request);
         }
 
         [HttpGet]
         [Route("{toolId}")]
-        public async Task<IActionResult> GetToolsById([FromRoute] int toolId)
+        public Task<IActionResult> GetToolById([FromRoute] int toolId)
         {
             var request = new GetToolByIdRequest()
             {
                 ToolId = toolId,
             };
-            var response = await mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetToolByIdRequest, GetToolByIdResponse>(request);
         }
 
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddTool([FromBody] AddToolRequest request)
+        public Task<IActionResult> AddTool([FromBody] AddToolRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<AddToolRequest, AddToolResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> PutTool([FromBody] PutToolRequest request)
+        public Task<IActionResult> PutTool([FromBody] PutToolRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<PutToolRequest, PutToolResponse>(request);
         }
 
         [HttpDelete]
-        [Route("{ToolId}")]
-        public async Task<IActionResult> DepeteTool([FromRoute] int ToolId)
+        [Route("{toolId}")]
+        public Task<IActionResult> DepeteTool([FromRoute] int toolId)
         {
             var request = new DeleteToolRequest()
             {
-                Id = ToolId,
+                Id = toolId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteToolRequest, DeleteToolResponse>(request);
         }
     }
 }
+

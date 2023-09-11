@@ -6,61 +6,53 @@ namespace ToolMonitor.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    public class CompanyController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public CompanyController(IMediator mediator)
+        public CompanyController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllCompanies([FromQuery] GetCompanyRequest request)
+        public Task<IActionResult> GetAllCompanies([FromQuery] GetCompanyRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetCompanyRequest, GetCompanyResponse>(request);
         }
 
         [HttpGet]
         [Route("{companyId}")]
-        public async Task<IActionResult> GetCompanyById([FromRoute] int companyId)
+        public Task<IActionResult> GetCompanyById([FromRoute] int companyId)
         {
             var request = new GetCompanyByIdRequest()
             {
                 Id = companyId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetCompanyByIdRequest, GetCompanyByIdResponse>(request);
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddCompany([FromBody] AddCompanyRequest request)
+        public Task<IActionResult> AddCompany([FromBody] AddCompanyRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<AddCompanyRequest, AddCompanyResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> PutCompany([FromBody] PutCompanyRequest request)
+        public Task<IActionResult> PutCompany([FromBody] PutCompanyRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<PutCompanyRequest, PutCompanyResponse>(request);
         }
 
         [HttpDelete]
         [Route("{companyId}")]
-        public async Task<IActionResult> DeleteCompany([FromRoute] int companyId)
+        public Task<IActionResult> DeleteCompany([FromRoute] int companyId)
         {
             var request = new DeleteCompanyRequest()
             {
                 CompanyId = companyId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteCompanyRequest, DeleteCompanyResponse>(request);
         }
     }
 }

@@ -50,14 +50,13 @@ namespace ToolMonitor.Controllers
 
         [HttpDelete]
         [Route("{departmentId}")]
-        public async Task<IActionResult> DepeteDepartment([FromRoute] int departmentId)
+        public Task<IActionResult> DepeteDepartment([FromRoute] int departmentId)
         {
             var request = new DeleteDepartmentRequest()
             {
                 Id = departmentId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteDepartmentRequest, DeleteDepartmentResponse>(request);
         }
     }
 }

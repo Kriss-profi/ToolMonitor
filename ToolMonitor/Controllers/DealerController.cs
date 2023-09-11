@@ -9,61 +9,54 @@ namespace ToolMonitor.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DealerController : ControllerBase
+    public class DealerController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public DealerController(IMediator mediator)
+        public DealerController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllDealers([FromQuery] GetDealersRequest request)
+        public Task<IActionResult> GetAllDealers([FromQuery] GetDealersRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetDealersRequest, GetDealersResponse>(request);
         }
 
         [HttpGet]
         [Route("{dealerId}")]
-        public async Task<IActionResult> GetDealerById([FromRoute] int dealerId)
+        public Task<IActionResult> GetDealerById([FromRoute] int dealerId)
         {
             var request = new GetDealerByIdRequest()
             {
-                Id = dealerId
+                Id = dealerId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<GetDealerByIdRequest, GetDealerByIdResponse>(request);
         }
+
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddDealer([FromBody] AddDealerRequest request)
+        public Task<IActionResult> AddDealer([FromBody] AddDealerRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<AddDealerRequest, AddDealerResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> PutDealer([FromBody] PutDealerRequest request)
+        public Task<IActionResult> PutDealer([FromBody] PutDealerRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<PutDealerRequest, PutDealerResponse>(request);
         }
 
         [HttpDelete]
         [Route("{dealerId}")]
-        public async Task<IActionResult> DeleteDealer([FromRoute] int dealerId)
+        public Task<IActionResult> DepeteDealer([FromRoute] int dealerId)
         {
             var request = new DeleteDealerRequest()
             {
                 Id = dealerId,
             };
-            var response = await this.mediator.Send(request);
-            return Ok(response);
+            return this.HandleRequest<DeleteDealerRequest, DeleteDealerResponse>(request);
         }
     }
 }
