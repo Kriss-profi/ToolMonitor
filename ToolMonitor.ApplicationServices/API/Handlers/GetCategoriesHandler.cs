@@ -13,23 +13,22 @@ namespace ToolMonitor.ApplicationServices.API.Handlers
     {
         private readonly IMapper mapper;
         private readonly IQueryExecutor queryExecutor;
-        private readonly ClaimsIdentity claims;
+        private readonly AccessCompany accessCompany;
 
-        public GetCategoriesHandler(IMapper mapper, IQueryExecutor queryExecutor, ClaimsIdentity claims)
+        public GetCategoriesHandler(IMapper mapper, IQueryExecutor queryExecutor, AccessCompany accessCompany)
         {
             this.mapper = mapper;
             this.queryExecutor = queryExecutor;
-            this.claims = claims;
+            this.accessCompany = accessCompany;
         }
 
         public async Task<GetCategoryResponse> Handle(GetCategoryRequest request, CancellationToken cancellationToken)
         {
-            int company = 1;
-            //int companyId = claims.SerialNumber.
+            int company = accessCompany.CompanyId;
 
-            var query = new GetCategoriesQuery();
+            var query = new GetCategoriesQuery(this.accessCompany);
 
-            query.CompanyId = company;
+            query.CompanyId = accessCompany.CompanyId;
             
             
             var categories = await this.queryExecutor.Execute(query);

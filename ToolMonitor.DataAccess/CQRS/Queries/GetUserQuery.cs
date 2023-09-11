@@ -10,7 +10,9 @@ namespace ToolMonitor.DataAccess.CQRS.Queries
 {
     public class  GetUserQuery : QueryBase<User>
     {
-        //public int Id { get; set; }
+        //public int? CompanyId { get; set; }
+        //public string FirstName { get; set; }
+        //public string LastName { get; set; }
         public string Email { get; set; }
         public override async Task<User> Execute(ToolStorageContext context)
         {

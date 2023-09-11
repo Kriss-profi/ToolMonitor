@@ -11,6 +11,7 @@ namespace ToolMonitor.DataAccess.CQRS.Queries
     public class GetToolQuery : QueryBase<Tool>
     {
         public int Id { get; set; }
+        public int CompanyId { get; set; } = 1; //= Claims.CompanyId
         public override async Task<Tool> Execute(ToolStorageContext context)
         {
             var tool = await context.Tools.FirstOrDefaultAsync(x => x.Id == this.Id);
